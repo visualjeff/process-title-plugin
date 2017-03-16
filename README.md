@@ -1,9 +1,9 @@
 
-## About lokijs-plugin
+## About process-title-plugin
 
-A hapi plugin to facilitate the initialization of lokijs within your application.
+A hapi plugin to set the process.title of your hapi application to the name that is defined within your project's package.json file.  Optional overrides for the location of your package.json (packageFileLocation) and your applications name (nameOverride) are also supported.
 
-[![Build Status](https://travis-ci.org/visualjeff/lokijsPlugin.png)](https://travis-ci.org/visualjeff/lokijsPlugin)
+[![Build Status](https://travis-ci.org/visualjeff/process-title-plugin.png)](https://travis-ci.org/visualjeff/process-title-plugin)
 
 See the example for details on accessing the database within routes.
 
@@ -21,12 +21,9 @@ server.connection({
 });
 
 server.register([{
-    register: require('lokijs-plugin'),
-    options: {
-        env: 'NODEJS' 
-    }
+    register: require('process-title-plugin')
 }, {
-    register: require('./routes/applicationRoutes') //Load routes
+    register: require('./routes/applicationRoutes') //Load some routes
 }], (err) => {
     if (err) {
         throw err;
@@ -38,7 +35,82 @@ server.start((err) => {
         throw err;
     }
 
-    console.dir(`Server running at:  ${server.info.uri}`, {
+    console.dir(`${process.title} is running at:  ${server.info.uri}`, {
+        colors: true
+    });
+});
+```
+## Usage using plugin option for package file location:
+
+```js
+'use strict';
+
+const Hapi = require('hapi');
+const Path = require('path');
+
+const server = new Hapi.Server();
+server.connection({
+    host: 'localhost',
+    port: 3000
+});
+
+server.register([{
+    register: require('process-title-plugin'),
+    options: {
+        packageFileLocation: Path.join(__dirname, '../differentDirectory', 'paquet.json')
+    }
+}, {
+    register: require('./routes/applicationRoutes') //Load some routes
+}], (err) => {
+    if (err) {
+        throw err;
+    }
+});
+
+server.start((err) => {
+    if (err) {
+        throw err;
+    }
+
+    console.dir(`${process.title} is running at:  ${server.info.uri}`, {
+        colors: true
+    });
+});
+```
+
+
+## Usage using plugin option for name override:
+
+```js
+'use strict';
+
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
+server.connection({
+    host: 'localhost',
+    port: 3000
+});
+
+server.register([{
+    register: require('process-title-plugin'),
+    options: {
+        nameOverride: 'myCustApp'
+    }
+}, {
+    register: require('./routes/applicationRoutes') //Load some routes
+}], (err) => {
+    if (err) {
+        throw err;
+    }
+});
+
+server.start((err) => {
+    if (err) {
+        throw err;
+    }
+
+    console.dir(`${process.title} is running at:  ${server.info.uri}`, {
         colors: true
     });
 });
