@@ -1,7 +1,7 @@
 
 ## About process-title-plugin
 
-A hapi plugin to set the process.title of your hapi application to the name that is defined within your project's package.json file.  Optional overrides for the location of your package.json (packageFileLocation) and your applications name (nameOverride) are also supported.
+A hapi plugin that sets the process.title of your hapi application to the name defined within your project's package.json file.  Optional overrides exist for setting the location of your package.json (packageFileLocation) and for overriding the name defined within the package.json file (nameOverride).
 
 [![Build Status](https://travis-ci.org/visualjeff/process-title-plugin.png)](https://travis-ci.org/visualjeff/process-title-plugin)
 
