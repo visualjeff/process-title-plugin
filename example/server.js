@@ -2,33 +2,29 @@
 
 const Hapi = require('hapi');
 
-const server = new Hapi.Server();
-
-server.connection({
+const server = new Hapi.Server({
     host: 'localhost',
     port: 3000
 });
 
-//If an optional override is provided it will be used instead of the package.json name property.
-server.register([{
-    register: require('../'),
-    options: {
-        nameOverride: 'MyHotApp'
-    }
-}], (err) => {
+async function startup() {
+    await server.register([{
+        plugin: require('../'),
+        options: {
+            nameOverride: 'MyHotApp'
+        }
+    }]);
+    await server.start();
+}
 
-    if (err) {
-        throw err;
-    }
-});
+try {
+    startup();
+    console.log(`${new Date()}: server running at ${server.info.uri}`);
+} catch (err) {
+    console.log(err);
+}
 
-server.start((err) => {
-
-    if (err) {
-        throw err;
-    }
-
-    console.dir(`${process.title} is running at: ${server.info.uri}`, {
-        colors: true
-    });
-});
+process.on('unhandledRejection', (error) => {
+    console.log(error);
+    process.exit(1);
+})

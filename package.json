@@ -18,12 +18,12 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "joi": "^10.2.2"
+    "hapi": "^17.2.0",
+    "joi": "^13.0.2"
   },
   "devDependencies": {
-    "code": "^4.0.0",
-    "hapi": "^16.1.0",
-    "lab": "^13.0.1"
+    "code": "^5.1.2",
+    "lab": "^15.1.2"
   },
   "scripts": {
     "test": "lab -r console -t 100 -a code -L",
