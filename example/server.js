@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 
 const Hapi = require('hapi');
@@ -7,7 +8,8 @@ const server = new Hapi.Server({
     port: 3000
 });
 
-async function startup() {
+const startup = async () => {
+
     await server.register([{
         plugin: require('../'),
         options: {
@@ -15,16 +17,13 @@ async function startup() {
         }
     }]);
     await server.start();
-}
+};
 
-try {
-    startup();
-    console.log(`${new Date()}: server running at ${server.info.uri}`);
-} catch (err) {
+startup().catch((err) => {
+
     console.log(err);
-}
-
-process.on('unhandledRejection', (error) => {
-    console.log(error);
     process.exit(1);
-})
+});
+
+console.log(`${new Date()}: server running at ${server.info.uri}`);
+
