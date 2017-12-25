@@ -21,8 +21,7 @@ const startup = async () => {
 
 startup().catch((err) => {
 
-    console.log(err);
-    process.exit(1);
+    throw err;
 });
 
 console.log(`${new Date()}: server running at ${server.info.uri}`);
