@@ -1,9 +1,9 @@
 'use strict';
 
 const Path = require('path');
-const Code = require('code');
-const Hapi = require('hapi');
-const Lab = require('lab');
+const Code = require('@hapi/code');
+const Hapi = require('@hapi/hapi');
+const Lab = require('@hapi/lab');
 
 // Declare internals
 const internals = {};
