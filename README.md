@@ -5,7 +5,10 @@ A hapi plugin that sets the process.title of your hapi application to the name d
 
 [![Build Status](https://travis-ci.org/visualjeff/process-title-plugin.png)](https://travis-ci.org/visualjeff/process-title-plugin)
 
-See the example for details on accessing the database within routes.
+## Install
+```
+npm install process-title-plugin --save
+```
 
 ## Usage:
 
@@ -13,6 +16,7 @@ See the example for details on accessing the database within routes.
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const processTitlePlugin = require('process-title-plugin');
 const Path = require('path');
 
 const server = new Hapi.Server({
@@ -22,9 +26,9 @@ const server = new Hapi.Server({
 
 const startup = async () => {
     await server.register([{
-        plugin: require('../'),
+        plugin: processTitlePlugin,
         options: {
-            packageFileLocation: Path.join(__dirname, '../', 'package.json')
+            packageFileLocation: Path.join(__dirname, './', 'package.json')
         }
     }]);
     await server.start();
@@ -44,6 +48,7 @@ console.log(`${new Date()}: server running at ${server.info.uri}`);
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const processTitlePlugin = require('process-title-plugin');
 const Path = require('path');
 
 const server = new Hapi.Server({
@@ -53,9 +58,9 @@ const server = new Hapi.Server({
 
 const startup = async () => {
     await server.register([{
-        plugin: require('../'),
+        plugin: processTitlePlugin,
         options: {
-            packageFileLocation: Path.join(__dirname, '../', 'package.json')
+            packageFileLocation: Path.join(__dirname, './', 'package.json')
             nameOverride: 'myCustApp'
         }
     }]);

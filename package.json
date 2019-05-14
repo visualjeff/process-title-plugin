@@ -1,7 +1,7 @@
 {
   "name": "process-title-plugin",
   "description": "A hapi plugin that sets your applications process.title to the name within your projects package.json",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "repository": "git://github.com/visualjeff/process-title-plugin.git",
   "bugs": {
     "url": "https://github.com/visualjeff/process-title-plugin/issues"
